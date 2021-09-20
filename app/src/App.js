@@ -2,16 +2,17 @@ import * as React from "react";
 
 import { Routes, Route, Link } from "react-router-dom";
 
+import Contacts from "./Contacts";
 import Tasks from "./Tasks";
 
 const App = () => (
   <main>
     <nav>
-      <Link to="/">Home</Link> | <Link to="dashboard">Dashboard</Link>
+      <Link to="/">Home</Link> | <Link to="contacts">View All Contacts</Link> 
     </nav>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/contacts" element={<ContactList />} />
     </Routes>
   </main>
 );
@@ -24,9 +25,10 @@ const Home = () => (
   </>
 );
 
-const Dashboard = () => (
+const ContactList = () => (
   <>
-    <h1>Dashboard</h1>
+    <h1>All Contacts</h1>
+    <Contacts />
   </>
 );
 

@@ -4,6 +4,7 @@ import pgp from "pg-promise";
 const db = initDb();
 
 export const getTasks = () => db.any("SELECT * FROM tasks");
+export const getContacts = () => db.any("SELECT * FROM contact_list");
 
 export const addTask = (name) =>
   db.one("INSERT INTO tasks(name) VALUES(${name}) RETURNING *", { name });

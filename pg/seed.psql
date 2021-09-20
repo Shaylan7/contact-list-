@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.3
--- Dumped by pg_dump version 13.3
+-- Dumped from database version 13.4
+-- Dumped by pg_dump version 13.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,6 +19,20 @@ SET row_security = off;
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
+
+--
+-- Name: contact_list; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.contact_list (
+    first_name character varying,
+    last_name character varying,
+    phone_number character varying,
+    email character varying,
+    notes character varying,
+    image character varying
+);
+
 
 --
 -- Name: tasks; Type: TABLE; Schema: public; Owner: -
@@ -55,6 +69,15 @@ ALTER SEQUENCE public.tasks_id_seq OWNED BY public.tasks.id;
 --
 
 ALTER TABLE ONLY public.tasks ALTER COLUMN id SET DEFAULT nextval('public.tasks_id_seq'::regclass);
+
+
+--
+-- Data for Name: contact_list; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.contact_list (first_name, last_name, phone_number, email, notes, image) FROM stdin;
+Shay	Hawthorne	555-123-4567	shay@gmail.com	only available after 5pm	https://media-exp1.licdn.com/dms/image/C5603AQH3FDiXv5x5rg/profile-displayphoto-shrink_800_800/0/1586221643520?e=1637798400&v=beta&t=mm4SSiO2jHpXbySZIBvQjiUK3mKOdXuKbmmoFm3Sggw
+\.
 
 
 --
