@@ -33,7 +33,6 @@ CREATE TABLE public.contact_list (
     image character varying
 );
 
-
 --
 -- Name: tasks; Type: TABLE; Schema: public; Owner: -
 --

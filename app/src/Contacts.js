@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import * as apiClient from "./apiClient";
+import EditContact from "./Edit";
 
 const Contacts = () => {
   const [contacts, setContacts] = React.useState([]);

@@ -1,55 +1,105 @@
 import * as React from "react";
+import { useForm } from "react-hook-form";
 
 import * as apiClient from "./apiClient";
 
-const Tasks = () => {
-  const [tasks, setTasks] = React.useState([]);
+const CreateContact = () => {
+  // const [contacts, setContacts] = React.useState([]);
 
-  const loadTasks = async () => setTasks(await apiClient.getTasks());
-  const addTask = (task) => apiClient.addTask(task).then(loadTasks);
+  // const loadContacts = async () => setContacts(await apiClient.getContacts());
+  const addContact = (first_name, last_name, phone_number, email, notes) =>
+    apiClient
+      .addContact(first_name, last_name, phone_number, email, notes)
+      .then(alert("you added a new contact"));
 
-  React.useEffect(() => {
-    loadTasks();
-  }, []);
+  // React.useEffect(() => {
+  //   loadContacts();
+  // }, []);
+
+
+ 
 
   return (
     <section>
-      <TaskList tasks={tasks} />
-      <AddTask {...{ addTask }} />
+      <CreateContactForm {...{ addContact }} />
     </section>
   );
 };
 
-const TaskList = ({ tasks }) => (
-  <ul>
-    {tasks.map(({ id, name }) => (
-      <li key={id}>{name}</li>
-    ))}
-  </ul>
-);
+const CreateContactForm = ({ addContact }) => {
 
-const AddTask = ({ addTask }) => {
-  const [task, setTask] = React.useState("");
+  const [contacts, setContacts] = React.useState("");
+  const [first_name, setFirstName] = React.useState("");
+  const [last_name, setLastName] = React.useState("");
+  const [phone_number, setPhone] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [notes, setNotes] = React.useState("");
 
-  const canAdd = task !== "";
+  const canAdd = first_name !== "";
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (canAdd) {
-      addTask(task);
-      setTask("");
+      setFirstName(first_name);
+      setLastName(last_name);
+      setPhone(phone_number);
+      setEmail(email);
+      setNotes(notes);
+      addContact(first_name, last_name, phone_number, email, notes);
+      setContacts("");
     }
   };
 
   return (
     <form onSubmit={onSubmit}>
       <label>
-        New task:{" "}
-        <input onChange={(e) => setTask(e.currentTarget.value)} value={task} />
+        First Name:{" "}
+        <input
+          onChange={(e) => setFirstName(e.currentTarget.value)}
+          value={first_name}
+          name="first_name"
+          required
+        />
       </label>
-      <button disabled={!canAdd}>Add</button>
+      <label>
+        Last Name:{" "}
+        <input
+          onChange={(e) => setLastName(e.currentTarget.value)}
+          value={last_name}
+          name="last_name"
+          required
+        />
+      </label>
+      <label>
+        Phone Number:{" "}
+        <input
+          onChange={(e) => setPhone(e.currentTarget.value)}
+          value={phone_number}
+          name="phone_number"
+          required
+        />
+      </label>
+      <label>
+        Email:{" "}
+        <input
+          onChange={(e) => setEmail(e.currentTarget.value)}
+          value={email}
+          name="email"
+          required
+        />
+      </label>
+      <label>
+        Notes:{" "}
+        <input
+          onChange={(e) => setNotes(e.currentTarget.value)}
+          value={notes}
+          name="notes"
+          required
+        />
+      </label>
+      <button>Add</button>
     </form>
   );
 };
 
-export default Tasks;
+export default CreateContact;
