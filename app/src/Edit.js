@@ -31,15 +31,12 @@ import * as apiClient from "./apiClient";
 const EditContactForm = (props) => {
   const [first_name, setFirstName] = useState(props.contact.first_name);
   const [contact_id, setContactId] = useState(props.contact.contact_id);
-  console.log(contact_id);
 
   const updateFirstName = (e) => {
     e.preventDefault();
     setContactId(contact_id);
     setFirstName(first_name);
-    apiClient
-      .updateContact(first_name, contact_id)
-      .then(alert("you updated a contact"));
+    apiClient.updateContact(first_name, contact_id).then(props.loadContacts());
   };
 
   return (

@@ -16,7 +16,12 @@ contactsRouter.post("/", async (request, response) => {
 });
 
 contactsRouter.put("/", async (request, response) => {
-  const contacts = await db.updateContact(request.body.first_name)
+  const contacts = await db.updateContact(request.body.first_name, request.body.contact_id)
+  response.status(201).json(contacts)
+});
+
+contactsRouter.delete("/", async (request, response) => {
+  const contacts = await db.deleteContact(request.body.contact_id)
   response.status(201).json(contacts)
 })
 
