@@ -25,6 +25,7 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.contact_list (
+    contact_id integer NOT NULL,
     first_name character varying,
     last_name character varying,
     phone_number character varying,
@@ -32,6 +33,28 @@ CREATE TABLE public.contact_list (
     notes character varying,
     image character varying
 );
+
+--
+-- Name: contact_list_contact_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.contact_list_contact_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+UPDATE contact_list
+SET image = 'https://media.glamour.com/photos/569580c35fff94d44eec3cdc/master/w_1600,c_limit/entertainment-2015-01-leslie-knope-final-season-main.jpg'
+WHERE contact_id = 3;
+
+--
+-- Name: contact_list_contact_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.contact_list_contact_id_seq OWNED BY public.contact_list.contact_id;
 
 
 --
@@ -65,6 +88,13 @@ ALTER SEQUENCE public.tasks_id_seq OWNED BY public.tasks.id;
 
 
 --
+-- Name: contact_list contact_id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.contact_list ALTER COLUMN contact_id SET DEFAULT nextval('public.contact_list_contact_id_seq'::regclass);
+
+
+--
 -- Name: tasks id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -75,8 +105,7 @@ ALTER TABLE ONLY public.tasks ALTER COLUMN id SET DEFAULT nextval('public.tasks_
 -- Data for Name: contact_list; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.contact_list (first_name, last_name, phone_number, email, notes, image) FROM stdin;
-Shay	Hawthorne	555-123-4567	shay@gmail.com	only available after 5pm	https://media-exp1.licdn.com/dms/image/C5603AQH3FDiXv5x5rg/profile-displayphoto-shrink_800_800/0/1586221643520?e=1637798400&v=beta&t=mm4SSiO2jHpXbySZIBvQjiUK3mKOdXuKbmmoFm3Sggw
+COPY public.contact_list (contact_id, first_name, last_name, phone_number, email, notes, image) FROM stdin;
 \.
 
 
@@ -94,10 +123,25 @@ COPY public.tasks (id, name) FROM stdin;
 
 
 --
+-- Name: contact_list_contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.contact_list_contact_id_seq', 1, false);
+
+
+--
 -- Name: tasks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.tasks_id_seq', 5, true);
+
+
+--
+-- Name: contact_list contact_list_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.contact_list
+    ADD CONSTRAINT contact_list_pkey PRIMARY KEY (contact_id);
 
 
 --
