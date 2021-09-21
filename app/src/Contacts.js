@@ -40,7 +40,9 @@ const ContactList = ({ contacts, loadContacts }) => {
               <tr>
                 <td>{contact.first_name}</td>
                 <td>{contact.last_name}</td>
-                <td>{/* <ViewContact contact={contact} /> */}</td>
+                <td>
+                  <ViewContact contact={contact} />
+                </td>
                 <td>
                   <EditContactForm
                     loadContacts={loadContacts}
