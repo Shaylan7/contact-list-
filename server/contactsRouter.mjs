@@ -15,4 +15,9 @@ contactsRouter.post("/", async (request, response) => {
   response.status(201).json(contacts);
 });
 
+contactsRouter.put("/", async (request, response) => {
+  const contacts = await db.updateContact(request.body.first_name)
+  response.status(201).json(contacts)
+})
+
 export default contactsRouter;
